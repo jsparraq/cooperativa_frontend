@@ -1,6 +1,5 @@
 // eslint-disable-next-line
 import App from "./components/App";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import * as serviceWorker from './serviceWorker';
 
 // If you want your app to work offline and load faster, you can change
