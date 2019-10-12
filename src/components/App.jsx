@@ -15,10 +15,16 @@ import PrivateRoute from './common/PrivateRoute';
 
 import store from '../store';
 
+import { loadUser } from '../actions/auth';
+
 const timeoutAlert = 3000;
 const positionAlert = 'top center';
 
 class App extends PureComponent {
+  componentDidMount() {
+    store.dispatch(loadUser());
+  }
+
   render() {
     return (
       <Provider store={store}>

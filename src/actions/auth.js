@@ -8,6 +8,9 @@ import {
   LOGIN_FAIL,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
+  USER_LOADING,
+  USER_LOADED,
+  AUTH_ERROR,
 } from './types';
 
 import {
@@ -32,7 +35,9 @@ export const tokenConfig = (getState) => {
   // if token, add to headers config
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
-    config.headers.userid = getState().auth.user._id;
+    if (getState().auth.user) {
+      config.headers.userid = getState().auth.user._id;
+    }
   }
 
   return config;
@@ -101,6 +106,25 @@ export const createUser = ({
       dispatch(returnErrors(err.response.data.message, err.response.status));
       dispatch({
         type: REGISTER_FAIL,
+      });
+    });
+};
+
+export const loadUser = () => (dispatch, getState) => {
+  dispatch({
+    type: USER_LOADING,
+  });
+  axios.get(`${BACKEND_URL}/validateUser`, tokenConfig(getState))
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: USER_LOADED,
+        payload: res.data,
+      });
+    }).catch((err) => {
+      dispatch(returnErrors(err.response.data.message, err.response.status));
+      dispatch({
+        type: AUTH_ERROR,
       });
     });
 };
