@@ -1,5 +1,6 @@
-// eslint-disable-next-line
-import App from "./components/App";
+
+// eslint-disable-next-line no-unused-vars
+import App from './components/App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as serviceWorker from './serviceWorker';
 
