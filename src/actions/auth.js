@@ -11,6 +11,7 @@ import {
   USER_LOADING,
   USER_LOADED,
   AUTH_ERROR,
+  LOGOUT_SUCCESS,
 } from './types';
 
 import {
@@ -116,7 +117,6 @@ export const loadUser = () => (dispatch, getState) => {
   });
   axios.get(`${BACKEND_URL}/validateUser`, tokenConfig(getState))
     .then((res) => {
-      console.log(res);
       dispatch({
         type: USER_LOADED,
         payload: res.data,
@@ -127,4 +127,10 @@ export const loadUser = () => (dispatch, getState) => {
         type: AUTH_ERROR,
       });
     });
+};
+
+export const logout = () => (dispatch) => {
+  dispatch({
+    type: LOGOUT_SUCCESS,
+  });
 };

@@ -18,6 +18,9 @@ export class Login extends Component {
     const { email, password } = this.state;
     const { loginForm } = this.props;
     loginForm(email, password);
+    this.setState({
+      password: '',
+    });
   };
 
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });

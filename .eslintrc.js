@@ -16,7 +16,10 @@ module.exports = {
   plugins: ['react'],
   rules: {
     'linebreak-style': 0,
-    "import/no-named-as-default": 0,
-    "no-underscore-dangle": ["error", { "allow": ["_id"] }]
+    'import/no-named-as-default': 0,
+    'no-underscore-dangle': ['error', {
+      'allow': ['_id']
+    }],
+    'no-console': 2
   },
 };

@@ -2,10 +2,11 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Proptypes from 'prop-types';
+import { logout } from '../../actions/auth';
 
 class Header extends PureComponent {
   render() {
-    const { auth } = this.props;
+    const { auth, logoutHeader } = this.props;
     const { isAuthenticated, user } = auth;
 
     const authLinks = (
@@ -13,6 +14,15 @@ class Header extends PureComponent {
         <span className="navbar-text mr-3">
           <strong>{user ? `Welcome ${user.name}` : ''}</strong>
         </span>
+        <li className="nav-item">
+          <button
+            onClick={logoutHeader}
+            className="nav-link btn btn-info btn-sm text-light"
+            type="button"
+          >
+            Logout
+          </button>
+        </li>
       </ul>
     );
 
@@ -43,6 +53,7 @@ class Header extends PureComponent {
 }
 
 Header.propTypes = {
+  logoutHeader: Proptypes.func.isRequired,
   auth: Proptypes.shape({
     isAuthenticated: Proptypes.bool.isRequired,
     user: Proptypes.shape({
@@ -58,5 +69,5 @@ const mapStateToProps = (state) => ({
 });
 export default connect(
   mapStateToProps,
-  {},
+  { logoutHeader: logout },
 )(Header);
