@@ -10,11 +10,17 @@ import {
   GET_ERRORS,
 } from './types';
 
-const backendPath = process.env.REACT_APP_API_URL;
+import {
+  BACKEND_URL,
+} from '../config/config';
 
-export const getUsers = () => (dispatch) => {
+import {
+  tokenConfig,
+} from './auth';
+
+export const getUsers = () => (dispatch, getState) => {
   axios
-    .get(`${backendPath}/getUsers`)
+    .get(`${BACKEND_URL}/getUsers`, tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: GET_USERS,
@@ -34,9 +40,9 @@ export const getUsers = () => (dispatch) => {
 };
 
 // DELETE User
-export const deleteUser = (id) => (dispatch) => {
+export const deleteUser = (id) => (dispatch, getState) => {
   axios
-    .delete(`${backendPath}/deleteUser/${id}`)
+    .delete(`${BACKEND_URL}/deleteUser/${id}`, tokenConfig(getState))
     .then(() => {
       dispatch(createMessage({
         msg: 'User Deleted',
@@ -59,9 +65,9 @@ export const deleteUser = (id) => (dispatch) => {
 };
 
 // ADD User
-export const addUser = (user) => (dispatch) => {
+export const addUser = (user) => (dispatch, getState) => {
   axios
-    .post(`${backendPath}/createUser`, user)
+    .post(`${BACKEND_URL}/createUser`, user, tokenConfig(getState))
     .then((res) => {
       dispatch(createMessage({
         msg: 'User Added',

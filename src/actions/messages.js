@@ -1,10 +1,19 @@
 import {
   CREATE_MESSAGE,
+  GET_ERRORS,
 } from './types';
 
 // CREATE MESSAGE
-// eslint-disable-next-line import/prefer-default-export
 export const createMessage = (msg) => ({
   type: CREATE_MESSAGE,
   payload: msg,
+});
+
+// RETURN ERRORS
+export const returnErrors = (msg, status) => ({
+  type: GET_ERRORS,
+  payload: {
+    msg,
+    status,
+  },
 });

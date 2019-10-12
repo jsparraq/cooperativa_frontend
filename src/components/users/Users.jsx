@@ -3,16 +3,6 @@ import { connect } from 'react-redux';
 import Proptypes from 'prop-types';
 import { getUsers, deleteUser } from '../../actions/users';
 
-const propTypes = {
-  users: Proptypes.arrayOf(Proptypes.shape({
-    _id: Proptypes.string.isRequired,
-    name: Proptypes.string.isRequired,
-    email: Proptypes.string.isRequired,
-  })).isRequired,
-  getUsersComponent: Proptypes.func.isRequired,
-  deleteUserComponent: Proptypes.func.isRequired,
-};
-
 export class Users extends Component {
   componentDidMount() {
     const { getUsersComponent } = this.props;
@@ -55,7 +45,17 @@ export class Users extends Component {
   }
 }
 
-Users.propTypes = propTypes;
+Users.propTypes = {
+  users: Proptypes.arrayOf(
+    Proptypes.shape({
+      _id: Proptypes.string.isRequired,
+      name: Proptypes.string.isRequired,
+      email: Proptypes.string.isRequired,
+    }),
+  ).isRequired,
+  getUsersComponent: Proptypes.func.isRequired,
+  deleteUserComponent: Proptypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   users: state.users.users,
