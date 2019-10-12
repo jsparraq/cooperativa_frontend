@@ -14,6 +14,9 @@
 # ENV Variables
 .env
 
+# VS Code settings
+.vscode
+
 
 # misc
 .DS_Store
