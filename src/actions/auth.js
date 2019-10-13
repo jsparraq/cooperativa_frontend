@@ -18,31 +18,10 @@ import {
   BACKEND_URL,
 } from '../config/config';
 
-// Setup config with token - helper function
+import {
+  tokenConfig,
+} from './utils';
 
-export const tokenConfig = (getState) => {
-  // Get token from state
-  const {
-    token,
-  } = getState().auth;
-
-  // Headers
-  const config = {
-    headers: {
-      'Content-type': 'application/json',
-    },
-  };
-
-  // if token, add to headers config
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-    if (getState().auth.user) {
-      config.headers.userid = getState().auth.user._id;
-    }
-  }
-
-  return config;
-};
 
 // LOGIN USER
 export const login = (email, password) => async (dispatch) => {

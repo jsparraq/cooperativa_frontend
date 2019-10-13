@@ -1,12 +1,10 @@
 import React from 'react';
-import Form from './Form';
-import Users from './Users';
+import Users from './admin/partnerNotAccepted';
 
 export default function Dashboard() {
   return (
     <div>
       <>
-        <Form />
         <Users />
       </>
     </div>

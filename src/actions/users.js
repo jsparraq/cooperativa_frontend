@@ -1,13 +1,13 @@
 import axios from 'axios';
 import {
   createMessage,
+  returnErrors,
 } from './messages';
 
 import {
   GET_USERS,
   DELETE_USER,
   ADD_USER,
-  GET_ERRORS,
 } from './types';
 
 import {
@@ -16,7 +16,7 @@ import {
 
 import {
   tokenConfig,
-} from './auth';
+} from './utils';
 
 export const getUsers = () => (dispatch, getState) => {
   axios
@@ -28,14 +28,7 @@ export const getUsers = () => (dispatch, getState) => {
       });
     })
     .catch((err) => {
-      const errors = {
-        msg: err.response.data.message,
-        status: err.response.status,
-      };
-      dispatch({
-        type: GET_ERRORS,
-        payload: errors,
-      });
+      dispatch(returnErrors(err.response.data.message, err.response.status));
     });
 };
 
@@ -53,14 +46,7 @@ export const deleteUser = (id) => (dispatch, getState) => {
       });
     })
     .catch((err) => {
-      const errors = {
-        msg: err.response.data,
-        status: err.response.status,
-      };
-      dispatch({
-        type: GET_ERRORS,
-        payload: errors,
-      });
+      dispatch(returnErrors(err.response.data.message, err.response.status));
     });
 };
 
@@ -78,13 +64,6 @@ export const addUser = (user) => (dispatch, getState) => {
       });
     })
     .catch((err) => {
-      const errors = {
-        msg: err.response.data,
-        status: err.response.status,
-      };
-      dispatch({
-        type: GET_ERRORS,
-        payload: errors,
-      });
+      dispatch(returnErrors(err.response.data.message, err.response.status));
     });
 };

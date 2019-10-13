@@ -4,28 +4,24 @@ import {
 } from '../../config/config';
 
 import {
-  ADD_USER,
-} from '../types';
-
-import {
-  createMessage,
   returnErrors,
 } from '../messages';
+
+import {
+  GET_PARTNERS,
+} from '../types';
 
 import {
   tokenConfig,
 } from '../utils';
 
 // eslint-disable-next-line import/prefer-default-export
-export const createPartner = (user) => (dispatch, getState) => {
+export const getPartnersNotAccepted = () => (dispatch, getState) => {
   axios
-    .post(`${BACKEND_URL}/createPartner`, user, tokenConfig(getState))
+    .get(`${BACKEND_URL}/getPartnersNotAccepted`, tokenConfig(getState))
     .then((res) => {
-      dispatch(createMessage({
-        msg: 'Partner created',
-      }));
       dispatch({
-        type: ADD_USER,
+        type: GET_PARTNERS,
         payload: res.data,
       });
     })
