@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import Proptypes from 'prop-types';
 import { deleteUser } from '../../actions/users';
 import { getPartnersNotAccepted } from '../../actions/partner/reader';
@@ -11,6 +12,10 @@ export class Users extends Component {
   }
 
   render() {
+    const { role } = this.props;
+    if (role === 'Partner') {
+      return <Redirect to="/" />;
+    }
     const { partners, deleteUserComponent } = this.props;
     return (
       <>
@@ -67,6 +72,7 @@ export class Users extends Component {
 }
 
 Users.propTypes = {
+  role: Proptypes.string.isRequired,
   partners: Proptypes.arrayOf(
     Proptypes.shape({
       _id: Proptypes.string.isRequired,
@@ -81,6 +87,7 @@ Users.propTypes = {
 
 const mapStateToProps = (state) => ({
   partners: state.partners.partners,
+  role: state.auth.user.role,
 });
 
 export default connect(
