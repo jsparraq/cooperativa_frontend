@@ -121,8 +121,7 @@ export const loadUser = () => (dispatch, getState) => {
         type: USER_LOADED,
         payload: res.data,
       });
-    }).catch((err) => {
-      dispatch(returnErrors(err.response.data.message, err.response.status));
+    }).catch(() => {
       dispatch({
         type: AUTH_ERROR,
       });

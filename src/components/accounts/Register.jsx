@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { createUser } from '../../actions/auth';
+import { createPartner } from '../../actions/partner/creator';
 import { createMessage } from '../../actions/messages';
 
 export class Register extends Component {
@@ -13,6 +13,7 @@ export class Register extends Component {
       email: '',
       password: '',
       password2: '',
+      createPartnerForm: false,
     };
   }
 
@@ -26,6 +27,13 @@ export class Register extends Component {
     } else {
       const newUser = { name, email, password };
       createUserRegister(newUser);
+      this.setState({
+        name: '',
+        email: '',
+        password: '',
+        password2: '',
+        createPartnerForm: true,
+      });
     }
   };
 
@@ -33,15 +41,16 @@ export class Register extends Component {
 
   render() {
     const { password2, password } = this.state;
-    const { name, email } = this.state;
+    const { name, email, createPartnerForm } = this.state;
     const { isAuthenticated } = this.props;
-    if (isAuthenticated) {
+
+    if (isAuthenticated || createPartnerForm) {
       return <Redirect to="/" />;
     }
     return (
       <div className="col-md-6 m-auto">
         <div className="card card-body mt-5">
-          <h2 className="text-center">Register</h2>
+          <h2 className="text-center">Register Partner</h2>
           <form onSubmit={this.onSubmit}>
             <label htmlFor="name">
               Name
@@ -49,6 +58,7 @@ export class Register extends Component {
                 type="text"
                 className="form-control"
                 name="name"
+                id="name"
                 onChange={this.onChange}
                 value={name}
               />
@@ -112,5 +122,5 @@ const mapStateToProps = (state) => ({
 });
 export default connect(
   mapStateToProps,
-  { createUserRegister: createUser, createMessageRegister: createMessage },
+  { createUserRegister: createPartner, createMessageRegister: createMessage },
 )(Register);
