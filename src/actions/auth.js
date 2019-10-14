@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
   returnErrors,
-} from './messages';
+} from './utils/messages';
 
 import {
   LOGIN_SUCCESS,
@@ -20,7 +20,7 @@ import {
 
 import {
   tokenConfig,
-} from './utils';
+} from './utils/utils';
 
 
 // LOGIN USER

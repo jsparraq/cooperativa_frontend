@@ -6,12 +6,12 @@ import {
 
 import {
   tokenConfig,
-} from '../utils';
+} from '../utils/utils';
 
 import {
   createMessage,
   returnErrors,
-} from '../messages';
+} from '../utils/messages';
 
 import {
   DENY_PARTNER,

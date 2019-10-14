@@ -24,7 +24,7 @@ export class Users extends Component {
     } = this.props;
     return (
       <>
-        <h2>Users lists</h2>
+        <h2>Partners not accepted</h2>
         <table className="table table-striped">
           <thead className="thead-dark">
             <tr>

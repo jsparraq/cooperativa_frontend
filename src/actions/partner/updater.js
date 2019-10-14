@@ -6,12 +6,12 @@ import {
 
 import {
   tokenConfig,
-} from '../utils';
+} from '../utils/utils';
 
 import {
   createMessage,
   returnErrors,
-} from '../messages';
+} from '../utils/messages';
 
 import {
   ACCEPT_PARTNER,
@@ -23,7 +23,7 @@ export const acceptPartner = (user) => (dispatch, getState) => {
     userId: user,
   }, tokenConfig(getState)).then((res) => {
     dispatch(createMessage({
-      msg: `Partner (${res.data.name}) accepted`,
+      msg: `Partner (${res.data.name}) have been accepted`,
     }));
     dispatch({
       type: ACCEPT_PARTNER,

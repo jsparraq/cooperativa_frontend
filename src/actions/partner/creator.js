@@ -10,11 +10,11 @@ import {
 import {
   createMessage,
   returnErrors,
-} from '../messages';
+} from '../utils/messages';
 
 import {
   tokenConfig,
-} from '../utils';
+} from '../utils/utils';
 
 // eslint-disable-next-line import/prefer-default-export
 export const createPartner = (user) => (dispatch, getState) => {
