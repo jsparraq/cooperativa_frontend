@@ -1,5 +1,7 @@
 import {
   GET_PARTNERS,
+  DENY_PARTNER,
+  ACCEPT_PARTNER,
 } from '../actions/types';
 
 const initialState = {
@@ -12,6 +14,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         partners: action.payload,
+      };
+    case ACCEPT_PARTNER:
+    case DENY_PARTNER:
+      return {
+        ...state,
+        partners: state.partners.filter((partner) => partner._id !== action.payload._id),
       };
     default:
       return state;

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Proptypes from 'prop-types';
-import { deleteUser } from '../../actions/users';
+import { denyPartner } from '../../actions/partner/deleter';
+import { acceptPartner } from '../../actions/partner/updater';
 import { getPartnersNotAccepted } from '../../actions/partner/reader';
 
 export class Users extends Component {
@@ -16,7 +17,11 @@ export class Users extends Component {
     if (role === 'Partner') {
       return <Redirect to="/" />;
     }
-    const { partners, deleteUserComponent } = this.props;
+    const {
+      partners,
+      deleteUserComponent,
+      acceptPartnerComponent,
+    } = this.props;
     return (
       <>
         <h2>Users lists</h2>
@@ -55,7 +60,7 @@ export class Users extends Component {
                   </button>
                   <> </>
                   <button
-                    onClick={deleteUserComponent.bind(this, user._id)}
+                    onClick={acceptPartnerComponent.bind(this, user._id)}
                     className="btn btn-success btn-sm"
                     type="button"
                   >
@@ -83,6 +88,7 @@ Users.propTypes = {
   ).isRequired,
   getUsersComponent: Proptypes.func.isRequired,
   deleteUserComponent: Proptypes.func.isRequired,
+  acceptPartnerComponent: Proptypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -92,5 +98,9 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps,
-  { getUsersComponent: getPartnersNotAccepted, deleteUserComponent: deleteUser },
+  {
+    getUsersComponent: getPartnersNotAccepted,
+    deleteUserComponent: denyPartner,
+    acceptPartnerComponent: acceptPartner,
+  },
 )(Users);

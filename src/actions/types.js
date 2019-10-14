@@ -1,7 +1,3 @@
-export const ADD_USER = 'ADD_USER';
-export const DELETE_USER = 'DELETE_USER';
-export const GET_USERS = 'GET_USERS';
-
 export const USER_LOADED = 'USER_LOADED';
 export const USER_LOADING = 'USER_LOADING';
 
@@ -19,3 +15,6 @@ export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAIL = 'REGISTER_FAIL';
 
 export const GET_PARTNERS = 'GET_PARTNERS';
+export const ADD_PARTNER = 'ADD_PARTNER';
+export const DENY_PARTNER = 'DENY_PARTNER';
+export const ACCEPT_PARTNER = 'ACCEPT_PARTNER';

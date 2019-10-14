@@ -4,7 +4,7 @@ import {
 } from '../../config/config';
 
 import {
-  ADD_USER,
+  ADD_PARTNER,
 } from '../types';
 
 import {
@@ -25,7 +25,7 @@ export const createPartner = (user) => (dispatch, getState) => {
         msg: 'Partner created',
       }));
       dispatch({
-        type: ADD_USER,
+        type: ADD_PARTNER,
         payload: res.data,
       });
     })

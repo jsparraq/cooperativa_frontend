@@ -25,7 +25,9 @@ Alerts.propTypes = {
     msg: PropTypes.string.isRequired,
     status: PropTypes.number.isRequired,
   }).isRequired,
-  message: PropTypes.string.isRequired,
+  message: PropTypes.shape({
+    msg: PropTypes.string.isRequired,
+  }).isRequired,
   alert: PropTypes.shape({
     error: PropTypes.func.isRequired,
     success: PropTypes.func.isRequired,

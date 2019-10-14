@@ -2,7 +2,9 @@ import {
   CREATE_MESSAGE,
 } from '../actions/types';
 
-const initialState = '';
+const initialState = {
+  msg: '',
+};
 
 export default function (state = initialState, action) {
   switch (action.type) {
