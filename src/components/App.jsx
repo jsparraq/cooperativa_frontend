@@ -6,14 +6,17 @@ import { Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 
 import { Provider } from 'react-redux';
+import store from '../store';
+
 import Header from './layout/Header';
-import Dashboard from './ScreenMain';
 import Alerts from './layout/Alerts';
-import Register from './accounts/Register';
-import Login from './accounts/Login';
 import PrivateRoute from './common/PrivateRoute';
 
-import store from '../store';
+import PartnersNotAccepted from './partnerNotAccepted';
+import newsFeed from './newsFeed';
+
+import Register from './accounts/Register';
+import Login from './accounts/Login';
 
 import { loadUser } from '../actions/auth';
 
@@ -39,7 +42,12 @@ class App extends PureComponent {
               <Alerts />
               <div className="container">
                 <Switch>
-                  <PrivateRoute exact path="/" component={Dashboard} />
+                  <PrivateRoute
+                    exact
+                    path="/partnersNotAccepted"
+                    component={PartnersNotAccepted}
+                  />
+                  <PrivateRoute exact path="/" component={newsFeed} />
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/register" component={Register} />
                 </Switch>

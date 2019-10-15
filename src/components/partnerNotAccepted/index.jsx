@@ -28,10 +28,10 @@ export class Users extends Component {
         <table className="table table-striped">
           <thead className="thead-dark">
             <tr>
-              <th>Nombre</th>
-              <th>Correo</th>
-              <th>Fecha de solicitud</th>
-              <th>Acción</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Application date</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>

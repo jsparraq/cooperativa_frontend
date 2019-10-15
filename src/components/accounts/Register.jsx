@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { createPartner } from '../../actions/partner/creator';
 import { createMessage } from '../../actions/utils/messages';
+import { labelStyle } from '../styles/utils';
 
 export class Register extends Component {
   constructor(props) {
@@ -52,7 +53,7 @@ export class Register extends Component {
         <div className="card card-body mt-5">
           <h2 className="text-center">Register Partner</h2>
           <form onSubmit={this.onSubmit}>
-            <label htmlFor="name">
+            <label htmlFor="name" style={labelStyle}>
               Name
               <input
                 type="text"
@@ -64,7 +65,7 @@ export class Register extends Component {
               />
             </label>
             <br />
-            <label htmlFor="email">
+            <label htmlFor="email" style={labelStyle}>
               Email
               <input
                 type="email"
@@ -75,7 +76,7 @@ export class Register extends Component {
               />
             </label>
             <br />
-            <label htmlFor="email">
+            <label htmlFor="password" style={labelStyle}>
               Password
               <input
                 type="password"
@@ -117,6 +118,7 @@ Register.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   createMessageRegister: PropTypes.func.isRequired,
 };
+
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });

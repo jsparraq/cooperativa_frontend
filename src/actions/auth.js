@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   returnErrors,
 } from './utils/messages';
@@ -15,11 +14,8 @@ import {
 } from './types';
 
 import {
-  BACKEND_URL,
-} from '../config/config';
-
-import {
   tokenConfig,
+  instance,
 } from './utils/utils';
 
 
@@ -38,8 +34,8 @@ export const login = (email, password) => async (dispatch) => {
     password,
   });
 
-  await axios
-    .post(`${BACKEND_URL}/login`, body, config)
+  await instance
+    .post('/login', body, config)
     .then((res) => {
       dispatch({
         type: LOGIN_SUCCESS,
@@ -74,8 +70,8 @@ export const createUser = ({
     password,
   });
 
-  axios
-    .post(`${BACKEND_URL}/createUser`, body, config)
+  instance
+    .post('/createUser', body, config)
     .then((res) => {
       dispatch({
         type: REGISTER_SUCCESS,
@@ -94,7 +90,7 @@ export const loadUser = () => (dispatch, getState) => {
   dispatch({
     type: USER_LOADING,
   });
-  axios.get(`${BACKEND_URL}/validateUser`, tokenConfig(getState))
+  instance.get('/validateUser', tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: USER_LOADED,

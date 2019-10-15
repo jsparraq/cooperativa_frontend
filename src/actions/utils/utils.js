@@ -1,6 +1,9 @@
-// Setup config with token - helper function
+import axios from 'axios';
 
-// eslint-disable-next-line import/prefer-default-export
+import {
+  BACKEND_URL,
+} from '../../config/config';
+
 export const tokenConfig = (getState) => {
   // Get token from state
   const {
@@ -24,3 +27,7 @@ export const tokenConfig = (getState) => {
 
   return config;
 };
+
+export const instance = axios.create({
+  baseURL: BACKEND_URL,
+});

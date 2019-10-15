@@ -1,8 +1,4 @@
 import {
-  ADD_PARTNER,
-} from '../types';
-
-import {
   createMessage,
   returnErrors,
 } from '../utils/messages';
@@ -12,16 +8,22 @@ import {
   instance,
 } from '../utils/utils';
 
+import {
+  CREATE_NEWS,
+} from '../types';
+
 // eslint-disable-next-line import/prefer-default-export
-export const createPartner = (user) => (dispatch, getState) => {
+export const createNews = (text) => (dispatch, getState) => {
   instance
-    .post('/createPartner', user, tokenConfig(getState))
+    .post('/createNews', {
+      text,
+    }, tokenConfig(getState))
     .then((res) => {
       dispatch(createMessage({
-        msg: 'Partner created',
+        msg: 'News feed created',
       }));
       dispatch({
-        type: ADD_PARTNER,
+        type: CREATE_NEWS,
         payload: res.data,
       });
     })

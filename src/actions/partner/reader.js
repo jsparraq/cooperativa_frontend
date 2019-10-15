@@ -1,8 +1,3 @@
-import axios from 'axios';
-import {
-  BACKEND_URL,
-} from '../../config/config';
-
 import {
   returnErrors,
   createMessage,
@@ -14,12 +9,13 @@ import {
 
 import {
   tokenConfig,
+  instance,
 } from '../utils/utils';
 
 // eslint-disable-next-line import/prefer-default-export
 export const getPartnersNotAccepted = () => (dispatch, getState) => {
-  axios
-    .get(`${BACKEND_URL}/getPartnersNotAccepted`, tokenConfig(getState))
+  instance
+    .get('/getPartnersNotAccepted', tokenConfig(getState))
     .then((res) => {
       if (res.data.length === 0) {
         dispatch(createMessage({

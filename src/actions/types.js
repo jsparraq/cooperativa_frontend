@@ -18,3 +18,6 @@ export const GET_PARTNERS = 'GET_PARTNERS';
 export const ADD_PARTNER = 'ADD_PARTNER';
 export const DENY_PARTNER = 'DENY_PARTNER';
 export const ACCEPT_PARTNER = 'ACCEPT_PARTNER';
+
+export const CREATE_NEWS = 'CREATE_NEWS';
+export const GET_NEWS = 'GET_NEWS';

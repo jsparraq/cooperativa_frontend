@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
+import { labelStyle } from '../styles/utils';
 
 export class Login extends Component {
   constructor(props) {
@@ -36,7 +37,7 @@ export class Login extends Component {
         <div className="card card-body mt-5">
           <h2 className="text-center">Login</h2>
           <form onSubmit={this.onSubmit}>
-            <label htmlFor="email">
+            <label htmlFor="email" style={labelStyle}>
               Email
               <input
                 type="email"
@@ -47,7 +48,7 @@ export class Login extends Component {
               />
             </label>
             <br />
-            <label htmlFor="email">
+            <label htmlFor="email" style={labelStyle}>
               Password
               <input
                 type="password"

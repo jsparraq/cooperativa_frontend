@@ -1,11 +1,6 @@
-import axios from 'axios';
-
-import {
-  BACKEND_URL,
-} from '../../config/config';
-
 import {
   tokenConfig,
+  instance,
 } from '../utils/utils';
 
 import {
@@ -19,7 +14,7 @@ import {
 
 // eslint-disable-next-line import/prefer-default-export
 export const denyPartner = (user) => (dispatch, getState) => {
-  axios.post(`${BACKEND_URL}/denyPartner`, {
+  instance.post('/denyPartner', {
     userId: user,
   }, tokenConfig(getState)).then((res) => {
     dispatch(createMessage({
