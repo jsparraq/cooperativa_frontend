@@ -16,9 +16,9 @@ class Header extends PureComponent {
         <>
           <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
             <li className="nav-item active">
-              <a className="nav-link" href="/partnersNotAccepted">
+              <Link to="/partnersNotAccepted" className="nav-link">
                 Partners Not Accepted
-              </a>
+              </Link>
             </li>
           </ul>
           <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
