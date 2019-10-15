@@ -8,7 +8,6 @@ import AlertTemplate from 'react-alert-template-basic';
 import { Provider } from 'react-redux';
 import store from '../store';
 
-import Header from './layout/Header';
 import Alerts from './layout/Alerts';
 import PrivateRoute from './common/PrivateRoute';
 
@@ -38,20 +37,17 @@ class App extends PureComponent {
         >
           <Router>
             <>
-              <Header />
               <Alerts />
-              <div className="container">
-                <Switch>
-                  <PrivateRoute exact path="/" component={newsFeed} />
-                  <PrivateRoute
-                    exact
-                    path="/partnersNotAccepted"
-                    component={PartnersNotAccepted}
-                  />
-                  <Route exact path="/login" component={Login} />
-                  <Route exact path="/register" component={Register} />
-                </Switch>
-              </div>
+              <Switch>
+                <PrivateRoute exact path="/" component={newsFeed} />
+                <PrivateRoute
+                  exact
+                  path="/partnersNotAccepted"
+                  component={PartnersNotAccepted}
+                />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
+              </Switch>
             </>
           </Router>
         </AlertProvider>

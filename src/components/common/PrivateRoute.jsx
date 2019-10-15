@@ -1,7 +1,9 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Header from '../layout/Header';
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => (
   <Route
@@ -14,8 +16,14 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => (
       if (!auth.isAuthenticated) {
         return <Redirect to="/login" />;
       }
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      return <Component {...props} />;
+      return (
+        <>
+          <Header />
+          <div className="container">
+            <Component {...props} />
+          </div>
+        </>
+      );
     }}
   />
 );

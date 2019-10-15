@@ -11,7 +11,7 @@ export class Feed extends PureComponent {
     return (
       <>
         <h3>News Feed</h3>
-        <div>{adminRole ? <PostForm /> : <></>}</div>
+        {adminRole ? <PostForm /> : <></>}
         <AllPost />
       </>
     );

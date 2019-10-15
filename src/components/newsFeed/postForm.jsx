@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { createNews } from '../../actions/news/creator';
-import { labelStyle } from '../styles/utils';
+
+import './postFrom.css';
 
 export class PostFrom extends Component {
   constructor(props) {
@@ -27,25 +28,19 @@ export class PostFrom extends Component {
   render() {
     const { message } = this.state;
     return (
-      <div className="post-form">
-        <form onSubmit={this.onSubmit}>
-          <label htmlFor="message" style={labelStyle}>
-            Message
-            <input
-              type="text"
-              className="form-control"
-              name="message"
-              onChange={this.onChange}
-              value={message}
-            />
-          </label>
-          <div className="form-group">
-            <button type="submit" className="btn btn-primary">
-              Publish
-            </button>
-          </div>
-        </form>
-      </div>
+      <form onSubmit={this.onSubmit} className="flex-form">
+        <label htmlFor="message">
+          <input
+            type="text"
+            className="form-control"
+            name="message"
+            placeholder="Write the news feed"
+            onChange={this.onChange}
+            value={message}
+          />
+        </label>
+        <input type="submit" className="btn" value="Publish" />
+      </form>
     );
   }
 }
