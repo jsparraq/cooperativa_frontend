@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { createPartner } from '../../actions/partner/creator';
 import { createMessage } from '../../actions/utils/messages';
-import { labelStyle } from '../styles/utils';
+import './Login.css';
 
 export class Register extends Component {
   constructor(props) {
@@ -49,24 +49,30 @@ export class Register extends Component {
       return <Redirect to="/" />;
     }
     return (
-      <div className="col-md-6 m-auto">
-        <div className="card card-body mt-5">
-          <h2 className="text-center">Register Partner</h2>
-          <form onSubmit={this.onSubmit}>
-            <label htmlFor="name" style={labelStyle}>
-              Name
+      <div className="container-login100">
+        <div className="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
+          <form
+            onSubmit={this.onSubmit}
+            className="login100-form flex-sb flex-w"
+          >
+            <span className="login100-form-title">Register</span>
+            <div className="p-b-9">
+              <span className="txt1">Name</span>
+            </div>
+            <div className="wrap-input100">
               <input
                 type="text"
-                className="form-control"
+                className="form-control input100"
                 name="name"
                 id="name"
                 onChange={this.onChange}
                 value={name}
               />
-            </label>
-            <br />
-            <label htmlFor="email" style={labelStyle}>
-              Email
+            </div>
+            <div className="p-t-31 p-b-9">
+              <span className="txt1">Email</span>
+            </div>
+            <div className="wrap-input100">
               <input
                 type="email"
                 className="form-control"
@@ -74,10 +80,11 @@ export class Register extends Component {
                 onChange={this.onChange}
                 value={email}
               />
-            </label>
-            <br />
-            <label htmlFor="password" style={labelStyle}>
-              Password
+            </div>
+            <div className="p-t-31 p-b-9">
+              <span className="txt1">password</span>
+            </div>
+            <div className="wrap-input100">
               <input
                 type="password"
                 className="form-control"
@@ -85,10 +92,11 @@ export class Register extends Component {
                 onChange={this.onChange}
                 value={password}
               />
-            </label>
-            <br />
-            <label htmlFor="email">
-              Confirm Password
+            </div>
+            <div className="p-t-31 p-b-9">
+              <span className="txt1">Confirm password</span>
+            </div>
+            <div className="wrap-input100">
               <input
                 type="password"
                 className="form-control"
@@ -96,9 +104,9 @@ export class Register extends Component {
                 onChange={this.onChange}
                 value={password2}
               />
-            </label>
-            <div className="form-group">
-              <button type="submit" className="btn btn-primary">
+            </div>
+            <div className="form-group container-login100-form-btn m-t-17">
+              <button type="submit" className="login100-form-btn">
                 Register
               </button>
             </div>

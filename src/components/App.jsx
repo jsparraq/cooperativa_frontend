@@ -36,7 +36,7 @@ class App extends PureComponent {
           timeout={timeoutAlert}
         >
           <Router>
-            <>
+            <div className="customContainer">
               <Alerts />
               <Switch>
                 <PrivateRoute exact path="/" component={newsFeed} />
@@ -48,7 +48,7 @@ class App extends PureComponent {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
               </Switch>
-            </>
+            </div>
           </Router>
         </AlertProvider>
       </Provider>

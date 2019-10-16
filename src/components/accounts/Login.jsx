@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
-import { labelStyle } from '../styles/utils';
+import './Login.css';
 
 export class Login extends Component {
   constructor(props) {
@@ -33,33 +33,39 @@ export class Login extends Component {
     }
     const { email, password } = this.state;
     return (
-      <div className="col-md-6 m-auto">
-        <div className="card card-body mt-5">
-          <h2 className="text-center">Login</h2>
-          <form onSubmit={this.onSubmit}>
-            <label htmlFor="email" style={labelStyle}>
-              Email
+      <div className="container-login100">
+        <div className="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
+          <form
+            onSubmit={this.onSubmit}
+            className="login100-form validate-form flex-sb flex-w"
+          >
+            <span className="login100-form-title">Login</span>
+            <div className="p-b-9">
+              <span className="txt1">Email</span>
+            </div>
+            <div className="wrap-input100">
               <input
                 type="email"
-                className="form-control"
+                className="form-control input100"
                 name="email"
                 onChange={this.onChange}
                 value={email}
               />
-            </label>
-            <br />
-            <label htmlFor="email" style={labelStyle}>
-              Password
+            </div>
+            <div className="p-t-13 p-b-9">
+              <span className="txt1">Password</span>
+            </div>
+            <div className="wrap-input100">
               <input
                 type="password"
-                className="form-control"
+                className="form-control input100"
                 name="password"
                 onChange={this.onChange}
                 value={password}
               />
-            </label>
-            <div className="form-group">
-              <button type="submit" className="btn btn-primary">
+            </div>
+            <div className="form-group container-login100-form-btn m-t-17">
+              <button type="submit" className="login100-form-btn">
                 Login
               </button>
             </div>
