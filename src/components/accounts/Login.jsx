@@ -46,7 +46,7 @@ export class Login extends Component {
             <div className="wrap-input100">
               <input
                 type="email"
-                className="form-control input100"
+                className="form-control"
                 name="email"
                 onChange={this.onChange}
                 value={email}
@@ -58,7 +58,7 @@ export class Login extends Component {
             <div className="wrap-input100">
               <input
                 type="password"
-                className="form-control input100"
+                className="form-control"
                 name="password"
                 onChange={this.onChange}
                 value={password}

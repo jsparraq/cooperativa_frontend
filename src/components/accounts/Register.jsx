@@ -62,7 +62,7 @@ export class Register extends Component {
             <div className="wrap-input100">
               <input
                 type="text"
-                className="form-control input100"
+                className="form-control"
                 name="name"
                 id="name"
                 onChange={this.onChange}
