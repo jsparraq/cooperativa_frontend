@@ -32,7 +32,7 @@ export class PostFrom extends Component {
         <label htmlFor="message">
           <input
             type="text"
-            className="form-control"
+            className="form-control post-form"
             name="message"
             placeholder="Write the news feed"
             onChange={this.onChange}

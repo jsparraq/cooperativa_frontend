@@ -50,56 +50,47 @@ export class Register extends Component {
     }
     return (
       <div className="container-login100">
-        <div className="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
-          <form
-            onSubmit={this.onSubmit}
-            className="login100-form flex-sb flex-w"
-          >
-            <span className="login100-form-title">Register</span>
-            <div className="p-b-9">
-              <span className="txt1">Name</span>
-            </div>
-            <div className="wrap-input100">
+        <div className="wrap-login100">
+          <div className="login100-form-title">
+            <span className="login100-form-title-1">Register</span>
+          </div>
+          <form onSubmit={this.onSubmit} className="login100-form">
+            <div className="wrap-input100 m-b-26">
+              <span className="label-input100">Name</span>
               <input
                 type="text"
-                className="form-control"
+                className="input100"
                 name="name"
                 id="name"
                 onChange={this.onChange}
                 value={name}
               />
             </div>
-            <div className="p-t-31 p-b-9">
-              <span className="txt1">Email</span>
-            </div>
-            <div className="wrap-input100">
+            <div className="wrap-input100 m-b-18">
+              <span className="label-input100">Email</span>
               <input
                 type="email"
-                className="form-control"
+                className="input100"
                 name="email"
                 onChange={this.onChange}
                 value={email}
               />
             </div>
-            <div className="p-t-31 p-b-9">
-              <span className="txt1">password</span>
-            </div>
-            <div className="wrap-input100">
+            <div className="wrap-input100 m-b-18">
+              <span className="label-input100">Password</span>
               <input
                 type="password"
-                className="form-control"
+                className="input100"
                 name="password"
                 onChange={this.onChange}
                 value={password}
               />
             </div>
-            <div className="p-t-31 p-b-9">
-              <span className="txt1">Confirm password</span>
-            </div>
-            <div className="wrap-input100">
+            <div className="wrap-input100 m-b-18">
+              <span className="label-input100">Confirm password</span>
               <input
                 type="password"
-                className="form-control"
+                className="input100"
                 name="password2"
                 onChange={this.onChange}
                 value={password2}
@@ -110,8 +101,9 @@ export class Register extends Component {
                 Register
               </button>
             </div>
-            <p>
+            <p className="account-class">
               Already have an account?
+              <> </>
               <Link to="/login">Login</Link>
             </p>
           </form>

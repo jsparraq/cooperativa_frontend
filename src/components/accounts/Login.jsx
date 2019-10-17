@@ -34,43 +34,39 @@ export class Login extends Component {
     const { email, password } = this.state;
     return (
       <div className="container-login100">
-        <div className="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
-          <form
-            onSubmit={this.onSubmit}
-            className="login100-form validate-form flex-sb flex-w"
-          >
-            <span className="login100-form-title">Login</span>
-            <div className="p-b-9">
-              <span className="txt1">Email</span>
-            </div>
-            <div className="wrap-input100">
+        <div className="wrap-login100">
+          <div className="login100-form-title">
+            <span className="login100-form-title-1">Login</span>
+          </div>
+          <form onSubmit={this.onSubmit} className="login100-form">
+            <div className="wrap-input100 m-b-26">
+              <span className="label-input100">Email</span>
               <input
                 type="email"
-                className="form-control"
+                className="input100"
                 name="email"
                 onChange={this.onChange}
                 value={email}
               />
             </div>
-            <div className="p-t-13 p-b-9">
-              <span className="txt1">Password</span>
-            </div>
-            <div className="wrap-input100">
+            <div className="wrap-input100 m-b-18">
+              <span className="label-input100">Password</span>
               <input
                 type="password"
-                className="form-control"
+                className="input100"
                 name="password"
                 onChange={this.onChange}
                 value={password}
               />
             </div>
-            <div className="form-group container-login100-form-btn m-t-17">
+            <div className="container-login100-form-btn">
               <button type="submit" className="login100-form-btn">
                 Login
               </button>
             </div>
-            <p>
+            <p className="account-class">
               Do not have an account?
+              <> </>
               <Link to="/register">Register</Link>
             </p>
           </form>
