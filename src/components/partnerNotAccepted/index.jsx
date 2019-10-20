@@ -52,19 +52,19 @@ export class Users extends Component {
                 </td>
                 <td>
                   <button
-                    onClick={deleteUserComponent.bind(this, user._id)}
-                    className="btn btn-danger btn-sm"
-                    type="button"
-                  >
-                    Delete
-                  </button>
-                  <> </>
-                  <button
                     onClick={acceptPartnerComponent.bind(this, user._id)}
                     className="btn btn-success btn-sm"
                     type="button"
                   >
-                    Aceptar
+                    Accept
+                  </button>
+                  <> </>
+                  <button
+                    onClick={deleteUserComponent.bind(this, user._id)}
+                    className="btn btn-danger btn-sm"
+                    type="button"
+                  >
+                    Reject
                   </button>
                 </td>
               </tr>
