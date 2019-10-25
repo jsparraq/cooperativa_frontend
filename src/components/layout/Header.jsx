@@ -20,6 +20,11 @@ class Header extends PureComponent {
                 Partners Not Accepted
               </Link>
             </li>
+            <li className="nav-item active">
+              <Link to="/payments" className="nav-link">
+                Payments
+              </Link>
+            </li>
           </ul>
           <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
             <span className="navbar-text mr-3">
@@ -73,9 +78,9 @@ class Header extends PureComponent {
 
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a className="navbar-brand" href="/">
+        <Link to="/login" className="nav-link">
           Cooperativa
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"

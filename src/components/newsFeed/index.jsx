@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Proptypes from 'prop-types';
-import PostForm from './postForm';
-import AllPost from './allPosts';
+import PostForm from './postForm/postForm';
+import AllPost from './posts/allPosts';
 
 export class Feed extends PureComponent {
   render() {

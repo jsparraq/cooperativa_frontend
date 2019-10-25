@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Proptypes from 'prop-types';
-import { getNews } from '../../actions/news/reader';
+import { getNews } from '../../../actions/news/reader';
 import Post from './post';
 
 export class AllPost extends Component {

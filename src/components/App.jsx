@@ -13,6 +13,7 @@ import PrivateRoute from './common/PrivateRoute';
 
 import PartnersNotAccepted from './partnerNotAccepted';
 import newsFeed from './newsFeed';
+import payments from './payments';
 
 import Register from './accounts/Register';
 import Login from './accounts/Login';
@@ -39,6 +40,7 @@ class App extends PureComponent {
             <Alerts />
             <Switch>
               <PrivateRoute exact path="/" component={newsFeed} />
+              <PrivateRoute exact path="/payments" component={payments} />
               <PrivateRoute
                 exact
                 path="/partnersNotAccepted"
