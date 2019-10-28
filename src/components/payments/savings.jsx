@@ -5,18 +5,39 @@ import { createSavings } from '../../actions/savings/creator';
 import { returnErrors } from '../../actions/utils/messages';
 
 class Savings extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      bond: 0,
+      total: 31000,
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
   paySavings = (e) => {
     const { userId, createSavingsPayments, returnErrorsPayments } = this.props;
+    const { bond } = this.state;
     if (userId === '') {
       returnErrorsPayments("You don't select some partner", '300');
     } else {
-      createSavingsPayments(1000, userId);
+      createSavingsPayments(bond, userId);
     }
     e.preventDefault();
   };
 
+  handleChange(event) {
+    let newTotal;
+    if (event.target.value === '') {
+      newTotal = 31000;
+    } else {
+      newTotal = 1000 + 30000 + parseInt(event.target.value, 10);
+    }
+    this.setState({ bond: event.target.value, total: newTotal });
+  }
+
   render() {
     const { userId } = this.props;
+    const { bond, total } = this.state;
     let disableButton;
     if (userId === '') {
       disableButton = 'btn btn-outline-success disabled savings-btn btn-block';
@@ -31,7 +52,9 @@ class Savings extends PureComponent {
             <thead>
               <tr>
                 <th scope="col">Topic</th>
-                <th scope="col">Amount</th>
+                <th scope="col" style={{ width: '50%' }}>
+                  Amount
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -41,7 +64,13 @@ class Savings extends PureComponent {
               </tr>
               <tr>
                 <td>Bond</td>
-                <td>$1.000</td>
+                <td>
+                  <input
+                    type="Number"
+                    value={bond}
+                    onChange={this.handleChange}
+                  />
+                </td>
               </tr>
               <tr>
                 <td>Fee</td>
@@ -52,7 +81,7 @@ class Savings extends PureComponent {
                   <strong>Total</strong>
                 </td>
                 <td>
-                  <strong>$32.000</strong>
+                  <strong>{`$${total}`}</strong>
                 </td>
               </tr>
             </tbody>

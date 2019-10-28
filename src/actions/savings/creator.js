@@ -11,9 +11,8 @@ import {
 // eslint-disable-next-line import/prefer-default-export
 export const createSavings = (bond, userId) => (dispatch, getState) => {
   instance
-    .post('/savings', {
+    .post(`/savings/${userId}`, {
       bond,
-      userId,
     }, tokenConfig(getState))
     .then(() => {
       dispatch(createMessage({
