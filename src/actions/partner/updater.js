@@ -14,9 +14,7 @@ import {
 
 // eslint-disable-next-line import/prefer-default-export
 export const acceptPartner = (user) => (dispatch, getState) => {
-  instance.post('/acceptPartner', {
-    userId: user,
-  }, tokenConfig(getState)).then((res) => {
+  instance.put(`/partner/${user}`, tokenConfig(getState)).then((res) => {
     dispatch(createMessage({
       msg: `Partner (${res.data.name}) have been accepted`,
     }));

@@ -15,7 +15,7 @@ import {
 // eslint-disable-next-line import/prefer-default-export
 export const createPartner = (user) => (dispatch, getState) => {
   instance
-    .post('/createPartner', user, tokenConfig(getState))
+    .post('/partner', user, tokenConfig(getState))
     .then((res) => {
       dispatch(createMessage({
         msg: 'Partner created',

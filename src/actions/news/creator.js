@@ -15,7 +15,7 @@ import {
 // eslint-disable-next-line import/prefer-default-export
 export const createNews = (text) => (dispatch, getState) => {
   instance
-    .post('/createNews', {
+    .post('/news', {
       text,
     }, tokenConfig(getState))
     .then((res) => {

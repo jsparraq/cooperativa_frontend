@@ -14,7 +14,7 @@ import {
 // eslint-disable-next-line import/prefer-default-export
 export const getNews = () => (dispatch, getState) => {
   instance
-    .get('/getNews', tokenConfig(getState))
+    .get('/news', tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: GET_NEWS,

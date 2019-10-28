@@ -71,7 +71,7 @@ export const createUser = ({
   });
 
   instance
-    .post('/createUser', body, config)
+    .post('/partner', body, config)
     .then((res) => {
       dispatch({
         type: REGISTER_SUCCESS,
@@ -90,7 +90,7 @@ export const loadUser = () => (dispatch, getState) => {
   dispatch({
     type: USER_LOADING,
   });
-  instance.get('/validateUser', tokenConfig(getState))
+  instance.get('/token', tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: USER_LOADED,

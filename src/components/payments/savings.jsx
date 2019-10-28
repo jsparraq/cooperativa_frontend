@@ -41,11 +41,19 @@ class Savings extends PureComponent {
               </tr>
               <tr>
                 <td>Bond</td>
-                <td>$2.000</td>
+                <td>$1.000</td>
               </tr>
               <tr>
                 <td>Fee</td>
                 <td>$30.000</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Total</strong>
+                </td>
+                <td>
+                  <strong>$32.000</strong>
+                </td>
               </tr>
             </tbody>
           </table>

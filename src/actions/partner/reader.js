@@ -15,7 +15,14 @@ import {
 
 export const getPartnersNotAccepted = () => (dispatch, getState) => {
   instance
-    .get('/getPartnersNotAccepted', tokenConfig(getState))
+    .get('/partner', {
+      ...tokenConfig(getState),
+      ...{
+        params: {
+          accepted: false,
+        },
+      },
+    })
     .then((res) => {
       if (res.data.length === 0) {
         dispatch(createMessage({
@@ -35,7 +42,14 @@ export const getPartnersNotAccepted = () => (dispatch, getState) => {
 
 export const getPartners = () => (dispatch, getState) => {
   instance
-    .get('/getPartners', tokenConfig(getState))
+    .get('/partner', {
+      ...tokenConfig(getState),
+      ...{
+        params: {
+          accepted: true,
+        },
+      },
+    })
     .then((res) => {
       if (res.data.length === 0) {
         dispatch(createMessage({

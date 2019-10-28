@@ -14,9 +14,7 @@ import {
 
 // eslint-disable-next-line import/prefer-default-export
 export const denyPartner = (user) => (dispatch, getState) => {
-  instance.post('/denyPartner', {
-    userId: user,
-  }, tokenConfig(getState)).then((res) => {
+  instance.delete(`/partner/${user}`, tokenConfig(getState)).then((res) => {
     dispatch(createMessage({
       msg: `Partner (${res.data.name}) have been deleted`,
     }));
