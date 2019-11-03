@@ -15,6 +15,8 @@ import PartnersNotAccepted from './partnerNotAccepted';
 import newsFeed from './newsFeed';
 import payments from './payments';
 
+import loan from './loan';
+
 import Register from './accounts/Register';
 import Login from './accounts/Login';
 
@@ -41,6 +43,7 @@ class App extends PureComponent {
             <Switch>
               <PrivateRoute exact path="/" component={newsFeed} />
               <PrivateRoute exact path="/payments" component={payments} />
+              <PrivateRoute exact path="/loan" component={loan} />
               <PrivateRoute
                 exact
                 path="/partnersNotAccepted"

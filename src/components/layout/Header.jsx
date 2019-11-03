@@ -44,20 +44,29 @@ class Header extends PureComponent {
       );
     } else {
       authLinks = (
-        <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
-          <span className="navbar-text mr-3">
-            <strong>{user ? `Welcome ${user.name}` : ''}</strong>
-          </span>
-          <li className="nav-item">
-            <button
-              onClick={logoutHeader}
-              className="nav-link btn btn-info btn-sm text-light"
-              type="button"
-            >
-              Logout
-            </button>
-          </li>
-        </ul>
+        <>
+          <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li className="nav-item active">
+              <Link to="/loan" className="nav-link">
+                Request loan
+              </Link>
+            </li>
+          </ul>
+          <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
+            <span className="navbar-text mr-3">
+              <strong>{user ? `Welcome ${user.name}` : ''}</strong>
+            </span>
+            <li className="nav-item">
+              <button
+                onClick={logoutHeader}
+                className="nav-link btn btn-info btn-sm text-light"
+                type="button"
+              >
+                Logout
+              </button>
+            </li>
+          </ul>
+        </>
       );
     }
 

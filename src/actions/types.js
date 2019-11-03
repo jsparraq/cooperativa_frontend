@@ -23,3 +23,5 @@ export const ACCEPT_PARTNER = 'ACCEPT_PARTNER';
 
 export const CREATE_NEWS = 'CREATE_NEWS';
 export const GET_NEWS = 'GET_NEWS';
+
+export const CREATE_LOANS = 'CREATE_LOANS';
