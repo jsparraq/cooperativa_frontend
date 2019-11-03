@@ -1,17 +1,17 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Proptypes from 'prop-types';
-import { logout } from '../../actions/auth';
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import Proptypes from "prop-types";
+import { logout } from "../../actions/auth";
 
 class Header extends PureComponent {
   render() {
     const { auth, logoutHeader } = this.props;
     const { isAuthenticated, user } = auth;
-    const role = user !== null ? user.role : '';
+    const role = user !== null ? user.role : "";
     let authLinks;
 
-    if (role === 'Admin') {
+    if (role === "Admin") {
       authLinks = (
         <>
           <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -25,10 +25,15 @@ class Header extends PureComponent {
                 Payments
               </Link>
             </li>
+            <li className="nav-item active">
+              <Link to="/requestedLoan" className="nav-link">
+                Requested Loan
+              </Link>
+            </li>
           </ul>
           <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
             <span className="navbar-text mr-3">
-              <strong>{user ? `Welcome ${user.name}` : ''}</strong>
+              <strong>{user ? `Welcome ${user.name}` : ""}</strong>
             </span>
             <li className="nav-item">
               <button
@@ -47,14 +52,14 @@ class Header extends PureComponent {
         <>
           <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
             <li className="nav-item active">
-              <Link to="/loan" className="nav-link">
+              <Link to="/requestloan" className="nav-link">
                 Request loan
               </Link>
             </li>
           </ul>
           <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
             <span className="navbar-text mr-3">
-              <strong>{user ? `Welcome ${user.name}` : ''}</strong>
+              <strong>{user ? `Welcome ${user.name}` : ""}</strong>
             </span>
             <li className="nav-item">
               <button
@@ -115,15 +120,15 @@ Header.propTypes = {
     isAuthenticated: Proptypes.bool.isRequired,
     user: Proptypes.shape({
       name: Proptypes.string.isRequired,
-      role: Proptypes.string.isRequired,
-    }),
-  }).isRequired,
+      role: Proptypes.string.isRequired
+    })
+  }).isRequired
 };
 
-const mapStateToProps = (state) => ({
-  auth: state.auth,
+const mapStateToProps = state => ({
+  auth: state.auth
 });
 export default connect(
   mapStateToProps,
-  { logoutHeader: logout },
+  { logoutHeader: logout }
 )(Header);

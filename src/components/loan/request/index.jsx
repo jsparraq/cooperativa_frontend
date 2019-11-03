@@ -2,23 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Proptypes from 'prop-types';
-import { createLoans } from '../../actions/loan/creator';
-import { returnErrors } from '../../actions/utils/messages';
-
-const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
+import { createLoans } from '../../../actions/loan/creator';
+import { returnErrors } from '../../../actions/utils/messages';
+import { months } from '../../utils';
 
 export class Loan extends Component {
   constructor(props) {
