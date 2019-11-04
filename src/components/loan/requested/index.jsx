@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Proptypes from 'prop-types';
 import { getLoansNotAccepted } from '../../../actions/loan/reader';
+import { denyLoan } from '../../../actions/loan/deleter';
+import { acceptLoan } from '../../../actions/loan/updater';
 import { months } from '../../utils';
 
 export class Users extends Component {
@@ -12,14 +14,14 @@ export class Users extends Component {
   }
 
   render() {
-    const { role } = this.props;
+    const { role, denyLoanComponent, acceptLoanComponent } = this.props;
     if (role === 'Partner') {
       return <Redirect to="/" />;
     }
     const { loans } = this.props;
     return (
       <>
-        <h2>Partners not accepted</h2>
+        <h2>Requested Loan</h2>
         <table className="table table-striped">
           <thead className="thead-dark">
             <tr>
@@ -48,11 +50,19 @@ export class Users extends Component {
                   }).format(new Date(loan.createdAt))}
                 </td>
                 <td>
-                  <button className="btn btn-success btn-sm" type="button">
+                  <button
+                    onClick={acceptLoanComponent.bind(this, loan._id)}
+                    className="btn btn-success btn-sm"
+                    type="button"
+                  >
                     Accept
                   </button>
                   <> </>
-                  <button className="btn btn-danger btn-sm" type="button">
+                  <button
+                    onClick={denyLoanComponent.bind(this, loan._id)}
+                    className="btn btn-danger btn-sm"
+                    type="button"
+                  >
                     Reject
                   </button>
                 </td>
@@ -68,6 +78,8 @@ export class Users extends Component {
 Users.propTypes = {
   role: Proptypes.string.isRequired,
   getLoansComponent: Proptypes.func.isRequired,
+  denyLoanComponent: Proptypes.func.isRequired,
+  acceptLoanComponent: Proptypes.func.isRequired,
   loans: Proptypes.arrayOf(
     Proptypes.shape({
       _id: Proptypes.string.isRequired,
@@ -92,5 +104,7 @@ export default connect(
   mapStateToProps,
   {
     getLoansComponent: getLoansNotAccepted,
+    denyLoanComponent: denyLoan,
+    acceptLoanComponent: acceptLoan,
   },
 )(Users);
