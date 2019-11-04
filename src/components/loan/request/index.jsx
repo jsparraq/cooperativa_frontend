@@ -76,7 +76,7 @@ export class Loan extends Component {
       <>
         <h3>Loans</h3>
         Select Month
-        <form onSubmit={this.onSubmit} netlify>
+        <form onSubmit={this.onSubmit} data-netlify="true">
           <select
             value={monthSelect}
             onChange={this.onChange}

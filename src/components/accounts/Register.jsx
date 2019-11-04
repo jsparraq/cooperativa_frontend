@@ -54,7 +54,11 @@ export class Register extends Component {
           <div className="login100-form-title">
             <span className="login100-form-title-1">Register</span>
           </div>
-          <form onSubmit={this.onSubmit} className="login100-form" netlify>
+          <form
+            onSubmit={this.onSubmit}
+            className="login100-form"
+            data-netlify="true"
+          >
             <div className="wrap-input100 m-b-26">
               <span className="label-input100">Name</span>
               <input

@@ -28,7 +28,7 @@ export class PostFrom extends Component {
   render() {
     const { message } = this.state;
     return (
-      <form onSubmit={this.onSubmit} className="flex-form" netlify>
+      <form onSubmit={this.onSubmit} className="flex-form" data-netlify="true">
         <label htmlFor="message">
           <input
             type="text"
