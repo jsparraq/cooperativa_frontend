@@ -3,6 +3,7 @@ import Proptypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createSavings } from '../../actions/savings/creator';
 import { returnErrors } from '../../actions/utils/messages';
+import { formatCurrency } from '../utils';
 
 class Savings extends PureComponent {
   constructor(props) {
@@ -81,7 +82,7 @@ class Savings extends PureComponent {
                   <strong>Total</strong>
                 </td>
                 <td>
-                  <strong>{`$${total}`}</strong>
+                  <strong>{formatCurrency(`${total}`)}</strong>
                 </td>
               </tr>
             </tbody>

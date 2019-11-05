@@ -5,7 +5,7 @@ import Proptypes from 'prop-types';
 import { getLoansNotAccepted } from '../../../actions/loan/reader';
 import { denyLoan } from '../../../actions/loan/deleter';
 import { acceptLoan } from '../../../actions/loan/updater';
-import { months } from '../../utils';
+import { months, formatCurrency } from '../../utils';
 
 export class Users extends Component {
   componentDidMount() {
@@ -36,7 +36,7 @@ export class Users extends Component {
             {loans.map((loan) => (
               <tr key={loan._id}>
                 <td>{`${loan.userId.name} (${loan.userId.email})`}</td>
-                <td>{loan.amount}</td>
+                <td>{formatCurrency(`${loan.amount}`)}</td>
                 <td>{`${months[loan.month]} (${loan.year})`}</td>
                 <td>
                   {new Intl.DateTimeFormat('en-GB', {

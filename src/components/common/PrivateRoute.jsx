@@ -15,7 +15,7 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => (
         return (
           <Loader
             style={{ margin: 'auto', maxHeight: '100%' }}
-            type="triangle"
+            type="Triangle"
             color="#00BFFF"
             height={100}
             width={100}
