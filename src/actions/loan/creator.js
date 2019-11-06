@@ -15,10 +15,11 @@ import {
 // eslint-disable-next-line import/prefer-default-export
 export const createLoans = (userId, month, year, amount) => (dispatch, getState) => {
   instance
-    .post(`/loan/${userId}`, {
+    .post('/loan', {
       year,
       month,
       amount,
+      userId,
     }, tokenConfig(getState))
     .then((res) => {
       dispatch(createMessage({
