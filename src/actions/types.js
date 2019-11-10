@@ -28,3 +28,5 @@ export const CREATE_LOANS = 'CREATE_LOANS';
 export const GET_LOANS = 'GET_LOANS';
 export const DENY_LOANS = 'DENY_LOANS';
 export const ACCEPT_LOANS = 'ACCEPT_LOANS';
+
+export const GET_FEE = 'GET_FEE';

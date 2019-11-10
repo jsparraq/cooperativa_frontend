@@ -1,44 +1,29 @@
-import React, { PureComponent } from 'react';
-import Proptypes from 'prop-types';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createSavings } from '../../actions/savings/creator';
+import Proptypes from 'prop-types';
+import { getFee } from '../../actions/fee/reader';
 import { returnErrors } from '../../actions/utils/messages';
 import { formatCurrency } from '../utils';
 
-class Savings extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      bond: 0,
-      total: 31000,
-    };
-    this.handleChange = this.handleChange.bind(this);
+class Fee extends Component {
+  componentDidMount() {
+    const { userId, returnErrorsPayments } = this.props;
+    if (userId === '') {
+      returnErrorsPayments("You don't select some partner", 500);
+    }
   }
 
-  paySavings = (e) => {
-    e.preventDefault();
-    const { userId, createSavingsPayments, returnErrorsPayments } = this.props;
-    const { bond } = this.state;
-    if (userId === '') {
-      returnErrorsPayments("You don't select some partner", '500');
-    } else {
-      createSavingsPayments(bond, userId);
+  componentDidUpdate(prevProps) {
+    const { userId, getFeePayment } = this.props;
+    if (userId !== prevProps.userId && userId !== '') {
+      getFeePayment(userId);
     }
-  };
-
-  handleChange(event) {
-    let newTotal;
-    if (event.target.value === '') {
-      newTotal = 31000;
-    } else {
-      newTotal = 1000 + 30000 + parseInt(event.target.value, 10);
-    }
-    this.setState({ bond: event.target.value, total: newTotal });
   }
 
   render() {
+    const { payment, interest, admin } = this.props;
     const { userId } = this.props;
-    const { bond, total } = this.state;
+    const total = payment + interest + admin;
     let disableButton;
     if (userId === '') {
       disableButton = 'btn btn-outline-success disabled savings-btn btn-block';
@@ -47,7 +32,7 @@ class Savings extends PureComponent {
     }
     return (
       <div className="card">
-        <div className="card-header">Savings</div>
+        <div className="card-header">Fee</div>
         <div className="card-body">
           <table className="table">
             <thead>
@@ -60,22 +45,16 @@ class Savings extends PureComponent {
             </thead>
             <tbody>
               <tr>
-                <td>Solidarity fund</td>
-                <td>$1.000</td>
+                <td>Payment</td>
+                <td>{formatCurrency(`${payment}`)}</td>
               </tr>
               <tr>
-                <td>Bond</td>
-                <td>
-                  <input
-                    type="Number"
-                    value={bond}
-                    onChange={this.handleChange}
-                  />
-                </td>
+                <td>Interest</td>
+                <td>{formatCurrency(`${interest}`)}</td>
               </tr>
               <tr>
-                <td>Fee</td>
-                <td>$30.000</td>
+                <td>Admin</td>
+                <td>{formatCurrency(`${admin}`)}</td>
               </tr>
               <tr>
                 <td>
@@ -90,10 +69,9 @@ class Savings extends PureComponent {
           <button
             type="button"
             className={disableButton}
-            onClick={this.paySavings}
             style={{ width: '20%', marginLeft: '70%' }}
           >
-            Pay saving
+            Fee saving
           </button>
         </div>
       </div>
@@ -101,16 +79,25 @@ class Savings extends PureComponent {
   }
 }
 
-Savings.propTypes = {
+Fee.propTypes = {
   userId: Proptypes.string.isRequired,
-  createSavingsPayments: Proptypes.func.isRequired,
+  getFeePayment: Proptypes.func.isRequired,
   returnErrorsPayments: Proptypes.func.isRequired,
+  payment: Proptypes.number.isRequired,
+  interest: Proptypes.number.isRequired,
+  admin: Proptypes.number.isRequired,
 };
 
+const mapStateToProps = (state) => ({
+  payment: state.fee.fee.payment,
+  interest: state.fee.fee.interest,
+  admin: state.fee.fee.admin,
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   {
-    createSavingsPayments: createSavings,
+    getFeePayment: getFee,
     returnErrorsPayments: returnErrors,
   },
-)(Savings);
+)(Fee);

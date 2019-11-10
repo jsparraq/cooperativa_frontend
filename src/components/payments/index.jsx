@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import Proptypes from 'prop-types';
 import { getPartners } from '../../actions/partner/reader';
 import Savings from './savings';
+import Fee from './fee';
 
 export class Payments extends PureComponent {
   constructor(props) {
@@ -48,6 +49,8 @@ export class Payments extends PureComponent {
           {partnersOption}
         </select>
         <Savings userId={value} />
+        <br />
+        <Fee userId={value} />
       </>
     );
   }
