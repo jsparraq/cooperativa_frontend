@@ -7,6 +7,7 @@ const initialState = {
     payment: 0,
     interest: 0,
     admin: 0,
+    loanId: '',
   },
 };
 

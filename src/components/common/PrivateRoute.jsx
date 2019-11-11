@@ -3,7 +3,6 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Loader from 'react-loader-spinner';
 import Header from '../layout/Header';
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => (
@@ -12,16 +11,7 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => (
     {...rest}
     render={(props) => {
       if (auth.isLoading) {
-        return (
-          <Loader
-            style={{ margin: 'auto', maxHeight: '100%' }}
-            type="Triangle"
-            color="#00BFFF"
-            height={100}
-            width={100}
-            timeout={3000}
-          />
-        );
+        return <>Loader</>;
       }
       if (!auth.isAuthenticated) {
         return <Redirect to="/login" />;

@@ -20,7 +20,7 @@ export const createFee = (payment, interest, penalty, admin, loanId) => (dispatc
     }, tokenConfig(getState))
     .then((res) => {
       dispatch(createMessage({
-        msg: res.message,
+        msg: res.data.message,
       }));
     })
     .catch((err) => {

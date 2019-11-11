@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Proptypes from 'prop-types';
 import { getPartners } from '../../actions/partner/reader';
+import { getFee } from '../../actions/fee/reader';
 import Savings from './savings';
 import Fee from './fee';
 
@@ -21,6 +22,8 @@ export class Payments extends PureComponent {
   }
 
   handleChange(event) {
+    const { getFeePayment } = this.props;
+    getFeePayment(event.target.value);
     this.setState({ value: event.target.value });
   }
 
@@ -59,6 +62,7 @@ export class Payments extends PureComponent {
 Payments.propTypes = {
   role: Proptypes.string.isRequired,
   getPartnersPayments: Proptypes.func.isRequired,
+  getFeePayment: Proptypes.func.isRequired,
   partners: Proptypes.arrayOf(
     Proptypes.shape({
       _id: Proptypes.string.isRequired,
@@ -76,6 +80,7 @@ const mapStateToProps = (state) => ({
 export default connect(
   mapStateToProps,
   {
+    getFeePayment: getFee,
     getPartnersPayments: getPartners,
   },
 )(Payments);

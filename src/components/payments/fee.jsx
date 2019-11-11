@@ -1,31 +1,53 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Proptypes from 'prop-types';
-import { getFee } from '../../actions/fee/reader';
+import { createFee } from '../../actions/fee/creator';
 import { returnErrors } from '../../actions/utils/messages';
 import { formatCurrency } from '../utils';
 
 class Fee extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      paymentFee: 0,
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidUpdate() {
     const { userId, returnErrorsPayments } = this.props;
     if (userId === '') {
       returnErrorsPayments("You don't select some partner", 500);
     }
   }
 
-  componentDidUpdate(prevProps) {
-    const { userId, getFeePayment } = this.props;
-    if (userId !== prevProps.userId && userId !== '') {
-      getFeePayment(userId);
+  payFee = (e) => {
+    e.preventDefault();
+    const { userId, createFeePayments, returnErrorsPayments } = this.props;
+    const { interest, admin } = this.props;
+    const { payment } = this.state;
+    const { loanId } = this.props;
+    if (userId === '' || payment === 0) {
+      returnErrorsPayments("You don't select some partner", 500);
+    } else {
+      createFeePayments(payment, interest, 0, admin, loanId);
     }
+  };
+
+  handleChange(event) {
+    this.setState({ paymentFee: event.target.value });
   }
 
   render() {
-    const { payment, interest, admin } = this.props;
+    const { interest, admin, payment } = this.props;
+    const { paymentFee } = this.state;
     const { userId } = this.props;
-    const total = payment + interest + admin;
+    let total =      parseInt(paymentFee, 10) + parseInt(interest, 10) + parseInt(admin, 10);
+    if (paymentFee === undefined || Number.isNaN(total)) {
+      total = parseInt(interest, 10) + parseInt(admin, 10);
+    }
     let disableButton;
-    if (userId === '') {
+    if (userId === '' || paymentFee === 0) {
       disableButton = 'btn btn-outline-success disabled savings-btn btn-block';
     } else {
       disableButton = 'btn btn-outline-success savings-btn btn-block';
@@ -46,7 +68,14 @@ class Fee extends Component {
             <tbody>
               <tr>
                 <td>Payment</td>
-                <td>{formatCurrency(`${payment}`)}</td>
+                <td>
+                  <input
+                    type="Number"
+                    value={paymentFee}
+                    placeholder={payment}
+                    onChange={this.handleChange}
+                  />
+                </td>
               </tr>
               <tr>
                 <td>Interest</td>
@@ -69,6 +98,7 @@ class Fee extends Component {
           <button
             type="button"
             className={disableButton}
+            onClick={this.payFee}
             style={{ width: '20%', marginLeft: '70%' }}
           >
             Fee saving
@@ -81,23 +111,25 @@ class Fee extends Component {
 
 Fee.propTypes = {
   userId: Proptypes.string.isRequired,
-  getFeePayment: Proptypes.func.isRequired,
   returnErrorsPayments: Proptypes.func.isRequired,
   payment: Proptypes.number.isRequired,
   interest: Proptypes.number.isRequired,
   admin: Proptypes.number.isRequired,
+  loanId: Proptypes.string.isRequired,
+  createFeePayments: Proptypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  payment: state.fee.fee.payment,
   interest: state.fee.fee.interest,
+  payment: state.fee.fee.payment,
   admin: state.fee.fee.admin,
+  loanId: state.fee.fee.loanId,
 });
 
 export default connect(
   mapStateToProps,
   {
-    getFeePayment: getFee,
     returnErrorsPayments: returnErrors,
+    createFeePayments: createFee,
   },
 )(Fee);

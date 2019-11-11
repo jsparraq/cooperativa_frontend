@@ -1,8 +1,16 @@
-import { returnErrors, createMessage } from '../utils/messages';
+import {
+  returnErrors,
+  createMessage,
+} from '../utils/messages';
 
-import { tokenConfig, instance } from '../utils/utils';
+import {
+  tokenConfig,
+  instance,
+} from '../utils/utils';
 
-import { GET_FEE } from '../types';
+import {
+  GET_FEE,
+} from '../types';
 
 // eslint-disable-next-line import/prefer-default-export
 export const getFee = (userId) => (dispatch, getState) => {
@@ -21,6 +29,7 @@ export const getFee = (userId) => (dispatch, getState) => {
             payment: 0,
             interest: 0,
             admin: 0,
+            loanId: '',
           },
         });
       } else {
