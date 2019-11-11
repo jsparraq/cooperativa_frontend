@@ -42,12 +42,12 @@ class Fee extends Component {
     const { interest, admin, payment } = this.props;
     const { paymentFee } = this.state;
     const { userId } = this.props;
-    let total = parseInt(paymentFee, 10) + parseInt(interest, 10) + parseInt(admin, 10);
+    let total =      parseInt(paymentFee, 10) + parseInt(interest, 10) + parseInt(admin, 10);
     if (paymentFee === undefined || Number.isNaN(total)) {
       total = parseInt(interest, 10) + parseInt(admin, 10);
     }
     let disableButton;
-    if (userId === '' || paymentFee === 0) {
+    if (userId === '' || interest === 0) {
       disableButton = 'btn btn-outline-success disabled savings-btn btn-block';
     } else {
       disableButton = 'btn btn-outline-success savings-btn btn-block';
