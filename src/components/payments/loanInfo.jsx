@@ -12,7 +12,12 @@ class LoanInfo extends PureComponent {
     } else {
       disable = false;
     }
-    const paidOut = loan.totalAmount - loan.amount;
+    let paidOut;
+    if (loan.totalAmount === undefined || loan.amount === undefined) {
+      paidOut = 0;
+    } else {
+      paidOut = loan.totalAmount - loan.amount;
+    }
     return (
       <>
         <button
