@@ -9,9 +9,9 @@ import {
 
 import {
   GET_LOANS,
+  GET_LOAN,
 } from '../types';
 
-// eslint-disable-next-line import/prefer-default-export
 export const getLoansNotAccepted = () => (dispatch, getState) => {
   instance
     .get('/loan', {
@@ -31,4 +31,13 @@ export const getLoansNotAccepted = () => (dispatch, getState) => {
     .catch((err) => {
       dispatch(returnErrors(err.response.data.message, err.response.status));
     });
+};
+
+export const getLoan = (loanId) => (dispatch, getState) => {
+  instance.get(`/loan/${loanId}`, tokenConfig(getState)).then((res) => {
+    dispatch({
+      type: GET_LOAN,
+      payload: res.data,
+    });
+  });
 };

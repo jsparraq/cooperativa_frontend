@@ -39,11 +39,11 @@ class Savings extends PureComponent {
   render() {
     const { userId } = this.props;
     const { bond, total } = this.state;
-    let disableButton;
+    let disable;
     if (userId === '') {
-      disableButton = 'btn btn-outline-success disabled savings-btn btn-block';
+      disable = true;
     } else {
-      disableButton = 'btn btn-outline-success savings-btn btn-block';
+      disable = false;
     }
     return (
       <div className="card">
@@ -89,8 +89,9 @@ class Savings extends PureComponent {
           </table>
           <button
             type="button"
-            className={disableButton}
+            className="btn btn-outline-success savings-btn btn-block"
             onClick={this.paySavings}
+            disabled={disable}
             style={{ width: '20%', marginLeft: '70%' }}
           >
             Pay saving

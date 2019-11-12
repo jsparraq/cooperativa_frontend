@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Proptypes from 'prop-types';
 import { createFee } from '../../actions/fee/creator';
+import { getLoan } from '../../actions/loan/reader';
 import { returnErrors } from '../../actions/utils/messages';
 import { formatCurrency } from '../utils';
+import LoanInfo from './loanInfo';
 
 class Fee extends Component {
   constructor(props) {
@@ -16,17 +18,19 @@ class Fee extends Component {
 
   componentDidUpdate() {
     const { userId, returnErrorsPayments } = this.props;
+    const { fee, getLoanPayment } = this.props;
     if (userId === '') {
       returnErrorsPayments("You don't select some partner", 500);
     }
+    getLoanPayment(fee.loanId);
   }
 
   payFee = (e) => {
     e.preventDefault();
     const { userId, createFeePayments, returnErrorsPayments } = this.props;
-    const { interest, admin } = this.props;
+    const { fee } = this.props;
+    const { interest, admin, loanId } = fee;
     const { payment } = this.state;
-    const { loanId } = this.props;
     if (userId === '' || payment === 0) {
       returnErrorsPayments("You don't select some partner", 500);
     } else {
@@ -39,22 +43,30 @@ class Fee extends Component {
   }
 
   render() {
-    const { interest, admin, payment } = this.props;
+    const { fee } = this.props;
+    const { interest, admin, payment } = fee;
     const { paymentFee } = this.state;
     const { userId } = this.props;
     let total = parseInt(paymentFee, 10) + parseInt(interest, 10) + parseInt(admin, 10);
     if (paymentFee === undefined || Number.isNaN(total)) {
       total = parseInt(interest, 10) + parseInt(admin, 10);
     }
-    let disableButton;
+    let disable;
     if (userId === '' || interest === 0) {
-      disableButton = 'btn btn-outline-success disabled savings-btn btn-block';
+      disable = true;
     } else {
-      disableButton = 'btn btn-outline-success savings-btn btn-block';
+      disable = false;
     }
     return (
       <div className="card">
-        <div className="card-header">Fee</div>
+        <div className="card-header">
+          <>
+            <>Fee</>
+            <>
+              <LoanInfo userId={userId} />
+            </>
+          </>
+        </div>
         <div className="card-body">
           <table className="table">
             <thead>
@@ -97,9 +109,10 @@ class Fee extends Component {
           </table>
           <button
             type="button"
-            className={disableButton}
+            className="btn btn-outline-success savings-btn btn-block"
             onClick={this.payFee}
             style={{ width: '20%', marginLeft: '70%' }}
+            disabled={disable}
           >
             Fee saving
           </button>
@@ -112,18 +125,18 @@ class Fee extends Component {
 Fee.propTypes = {
   userId: Proptypes.string.isRequired,
   returnErrorsPayments: Proptypes.func.isRequired,
-  payment: Proptypes.number.isRequired,
-  interest: Proptypes.number.isRequired,
-  admin: Proptypes.number.isRequired,
-  loanId: Proptypes.string.isRequired,
+  getLoanPayment: Proptypes.func.isRequired,
+  fee: Proptypes.shape({
+    payment: Proptypes.number.isRequired,
+    interest: Proptypes.number.isRequired,
+    admin: Proptypes.number.isRequired,
+    loanId: Proptypes.string.isRequired,
+  }).isRequired,
   createFeePayments: Proptypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  interest: state.fee.fee.interest,
-  payment: state.fee.fee.payment,
-  admin: state.fee.fee.admin,
-  loanId: state.fee.fee.loanId,
+  fee: state.fee.fee,
 });
 
 export default connect(
@@ -131,5 +144,6 @@ export default connect(
   {
     returnErrorsPayments: returnErrors,
     createFeePayments: createFee,
+    getLoanPayment: getLoan,
   },
 )(Fee);
