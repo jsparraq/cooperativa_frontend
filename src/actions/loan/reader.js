@@ -9,7 +9,7 @@ import {
 
 import {
   GET_LOANS,
-  GET_LOAN,
+  GET_ONE_LOAN,
 } from '../types';
 
 export const getLoansNotAccepted = () => (dispatch, getState) => {
@@ -34,10 +34,14 @@ export const getLoansNotAccepted = () => (dispatch, getState) => {
 };
 
 export const getLoan = (loanId) => (dispatch, getState) => {
-  instance.get(`/loan/${loanId}`, tokenConfig(getState)).then((res) => {
-    dispatch({
-      type: GET_LOAN,
-      payload: res.data,
+  if (loanId !== '') {
+    instance.get(`/loan/${loanId}`, tokenConfig(getState)).then((res) => {
+      dispatch({
+        type: GET_ONE_LOAN,
+        payload: res.data,
+      });
+    }).catch((err) => {
+      dispatch(returnErrors(err.response.data.message, err.response.status));
     });
-  });
+  }
 };

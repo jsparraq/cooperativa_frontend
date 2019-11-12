@@ -12,6 +12,7 @@ class Fee extends Component {
     super(props);
     this.state = {
       paymentFee: 0,
+      penalty: false,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -30,26 +31,37 @@ class Fee extends Component {
     const { userId, createFeePayments, returnErrorsPayments } = this.props;
     const { fee } = this.props;
     const { interest, admin, loanId } = fee;
-    const { payment } = this.state;
-    if (userId === '' || payment === 0) {
+    const { paymentFee, penalty } = this.state;
+    if (userId === '' || interest === 0) {
       returnErrorsPayments("You don't select some partner", 500);
+    } else if (penalty) {
+      createFeePayments(paymentFee, interest, 10000, admin, loanId);
     } else {
-      createFeePayments(payment, interest, 0, admin, loanId);
+      createFeePayments(paymentFee, interest, 0, admin, loanId);
     }
   };
 
   handleChange(event) {
-    this.setState({ paymentFee: event.target.value });
+    const { target } = event;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const { name } = target;
+
+    this.setState({
+      [name]: value,
+    });
   }
 
   render() {
     const { fee } = this.props;
     const { interest, admin, payment } = fee;
-    const { paymentFee } = this.state;
+    const { paymentFee, penalty } = this.state;
     const { userId } = this.props;
     let total = parseInt(paymentFee, 10) + parseInt(interest, 10) + parseInt(admin, 10);
     if (paymentFee === undefined || Number.isNaN(total)) {
       total = parseInt(interest, 10) + parseInt(admin, 10);
+    }
+    if (penalty) {
+      total += 10000;
     }
     let disable;
     if (userId === '' || interest === 0) {
@@ -83,6 +95,7 @@ class Fee extends Component {
                 <td>
                   <input
                     type="Number"
+                    name="paymentFee"
                     value={paymentFee}
                     placeholder={payment}
                     onChange={this.handleChange}
@@ -96,6 +109,17 @@ class Fee extends Component {
               <tr>
                 <td>Admin</td>
                 <td>{formatCurrency(`${admin}`)}</td>
+              </tr>
+              <tr>
+                <td>Penalty</td>
+                <td>
+                  <input
+                    name="penalty"
+                    type="checkbox"
+                    checked={penalty}
+                    onChange={this.handleChange}
+                  />
+                </td>
               </tr>
               <tr>
                 <td>
@@ -139,11 +163,8 @@ const mapStateToProps = (state) => ({
   fee: state.fee.fee,
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    returnErrorsPayments: returnErrors,
-    createFeePayments: createFee,
-    getLoanPayment: getLoan,
-  },
-)(Fee);
+export default connect(mapStateToProps, {
+  returnErrorsPayments: returnErrors,
+  createFeePayments: createFee,
+  getLoanPayment: getLoan,
+})(Fee);

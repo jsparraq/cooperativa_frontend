@@ -23,7 +23,9 @@ export class Payments extends PureComponent {
 
   handleChange(event) {
     const { getFeePayment } = this.props;
-    getFeePayment(event.target.value);
+    if (event.target.value !== '') {
+      getFeePayment(event.target.value);
+    }
     this.setState({ value: event.target.value });
   }
 
@@ -77,10 +79,7 @@ const mapStateToProps = (state) => ({
   role: state.auth.user.role,
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    getFeePayment: getFee,
-    getPartnersPayments: getPartners,
-  },
-)(Payments);
+export default connect(mapStateToProps, {
+  getFeePayment: getFee,
+  getPartnersPayments: getPartners,
+})(Payments);

@@ -2,7 +2,7 @@ import {
   GET_LOANS,
   ACCEPT_LOANS,
   DENY_LOANS,
-  GET_LOAN,
+  GET_ONE_LOAN,
 } from '../actions/types';
 
 const initialState = {
@@ -15,18 +15,15 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case GET_LOAN:
+    case GET_ONE_LOAN:
       return {
-        loans: [],
+        loans: initialState.loans,
         loan: action.payload,
       };
     case GET_LOANS:
       return {
         loans: action.payload,
-        loan: {
-          amount: 0,
-          totalAmount: 0,
-        },
+        loan: initialState.loan,
       };
     case ACCEPT_LOANS:
     case DENY_LOANS:
