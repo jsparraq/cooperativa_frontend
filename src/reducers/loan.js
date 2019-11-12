@@ -17,11 +17,16 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case GET_LOAN:
       return {
+        loans: [],
         loan: action.payload,
       };
     case GET_LOANS:
       return {
         loans: action.payload,
+        loan: {
+          amount: 0,
+          totalAmount: 0,
+        },
       };
     case ACCEPT_LOANS:
     case DENY_LOANS:
